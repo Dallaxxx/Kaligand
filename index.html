@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RevisionApp">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3233/3233483.png">
+    <link rel="apple-touch-icon" href="icon.png">
     <!-- Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -122,10 +122,24 @@
             </div>
 
             <div class="sidebar-footer">
-                <div class="backup-controls" style="margin-bottom: 10px; display: flex; gap: 5px;">
-                    <button id="export-btn" class="secondary-btn w-full tooltip" title="Download Local JSON"><i class="fa-solid fa-download"></i></button>
-                    <button id="import-btn" class="secondary-btn w-full tooltip" title="Upload Local JSON"><i class="fa-solid fa-upload"></i></button>
-                    <input type="file" id="import-file" accept=".json" class="hidden">
+                <!-- Global Backup Actions -->
+                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-light);">
+                    <h4 style="margin-bottom: 12px; font-size: 14px; color: var(--text-main);"><i class="fa-solid fa-floppy-disk"></i> Backup & Restore</h4>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="secondary-btn" onclick="exportFile()" style="font-size: 12px; padding: 8px 15px; flex: 1; min-width: 140px;">
+                            <i class="fa-solid fa-file-download"></i> Manual Backup (Local)
+                        </button>
+                        <button class="secondary-btn" id="tg-sync-btn" style="font-size: 12px; padding: 8px 15px; flex: 1; min-width: 140px;">
+                            <i class="fa-brands fa-telegram"></i> Telegram Backup
+                        </button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <button class="primary-btn" onclick="document.getElementById('importFile').click()" style="width: 100%; font-size: 12px; padding: 8px 0; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-light);">
+                        <i class="fa-solid fa-file-import"></i> Restore from Backup
+                    </button>
+                    <input type="file" id="importFile" style="display:none" onchange="importFile(event)" accept=".json">
                 </div>
                 <button id="logout-btn" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
             </div>
