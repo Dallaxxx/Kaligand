@@ -354,6 +354,45 @@ if(exportBtn) {
     });
 }
 
+window.importFileSecure = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            const usernames = Object.keys(importedData);
+            if (usernames.length === 0) {
+                alert("This backup file is empty.");
+                return;
+            }
+
+            const targetUsername = usernames[0];
+            const targetUser = importedData[targetUsername];
+
+            if (targetUser && targetUser.profile && targetUser.profile.password) {
+                const pass = prompt(`Enter password for "${targetUsername}" to restore and login:`);
+                if (pass === targetUser.profile.password) {
+                    appData = importedData;
+                    saveData();
+                    localStorage.setItem('currentUser', targetUsername);
+                    alert("Data restored and logged in successfully!");
+                    checkAuth();
+                } else if (pass !== null) {
+                    alert("Wrong password. Restore cancelled.");
+                }
+            } else {
+                alert("Invalid backup format: No user profile found.");
+            }
+        } catch (err) {
+            alert("Error reading file: " + err.message);
+        }
+        event.target.value = '';
+    };
+    reader.readAsText(file);
+}
+
 if(importBtn && importFile) {
     importBtn.addEventListener('click', () => {
         importFile.click();
@@ -367,13 +406,11 @@ if(importBtn && importFile) {
         reader.onload = function(event) {
             try {
                 const importedData = JSON.parse(event.target.result);
-                // Basic validation
                 if (typeof importedData === 'object') {
                     appData = importedData;
                     saveData();
                     alert("Data restored successfully!");
-                    checkAuth(); // This re-initializes currentUser and UI
-                    // Force refresh of the current view
+                    checkAuth();
                     const activeNav = document.querySelector('.nav-btn.active');
                     if (activeNav) switchView(activeNav.dataset.view);
                 } else {
@@ -384,8 +421,6 @@ if(importBtn && importFile) {
             }
         };
         reader.readAsText(file);
-        
-        // Reset input so the same file can be selected again if needed
         importFile.value = '';
     });
 }

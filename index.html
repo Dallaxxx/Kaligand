@@ -65,6 +65,14 @@
                 <div class="error-msg" id="signup-error"></div>
                 <button type="submit" class="primary-btn">Create Account</button>
             </form>
+
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-light); text-align: center;">
+                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Coming from another device? Load your data here:</p>
+                <button class="secondary-btn" onclick="document.getElementById('auth-import-file').click()" style="width: 100%; font-size: 12px; padding: 10px 0; background: rgba(59, 130, 246, 0.05); border: 1px dashed var(--primary); color: var(--primary);">
+                    <i class="fa-solid fa-file-import"></i> Restore from Backup File
+                </button>
+                <input type="file" id="auth-import-file" style="display:none" onchange="importFileSecure(event)" accept=".json">
+            </div>
         </div>
     </div>
 
