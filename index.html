@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Revision Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Syllabus & Revision Tracker</title>
+    
+    <!-- PWA & iOS Specific -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="RevisionApp">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3233/3233483.png">
     <!-- Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -92,6 +99,7 @@
                 <div class="theme-row" style="margin-bottom: 15px;">
                     <span>Theme Style</span>
                     <select id="theme-style-selector" class="custom-input" style="width: auto; padding: 4px 8px; font-size: 12px; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--border-light); border-radius: 4px;">
+                        <option value="auto">Auto (System)</option>
                         <option value="light">Light Mode</option>
                         <option value="dark">Dark Mode</option>
                         <option value="chatgpt">ChatGPT B&W</option>
